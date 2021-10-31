@@ -84528,7 +84528,9 @@ var useStyles = (0, _core.makeStyles)({
     fontFamily: 'Montserrat',
     fontWeight: 'bolder',
     textAlign: 'center',
-    marginRight: '3rem'
+    marginRight: '3rem',
+    position: 'relative',
+    bottom: '2rem'
   }
 });
 
@@ -84563,11 +84565,13 @@ var Weather = function Weather() {
     return _axios.default.get(url).then(function (res) {
       setLocationDetails(res.data);
       setWeather(res.data.main);
+      setCity('');
     }).catch(function (err) {
       console.log(err);
     });
   };
 
+  console.log(weather);
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
     className: classes.base
   }, /*#__PURE__*/_react.default.createElement("form", {
@@ -84576,7 +84580,7 @@ var Weather = function Weather() {
     onSubmit: handleSubmit
   }, /*#__PURE__*/_react.default.createElement("h1", {
     className: classes.h1
-  }, "Weather Forecast"), /*#__PURE__*/_react.default.createElement(_core.TextField, {
+  }, "WeatherNow - Get weather by city!"), /*#__PURE__*/_react.default.createElement(_core.TextField, {
     onChange: function onChange(e) {
       setCity(e.target.value);
     },
@@ -84592,7 +84596,15 @@ var Weather = function Weather() {
     size: "medium"
   }, "Get Weather"))), Object.keys(weather).length === 0 && weather.constructor === Object ? null : /*#__PURE__*/_react.default.createElement("h2", {
     className: classes.text
-  }, "It's ", weather['temp'].toString().substring(0, 2), "\xB0 C in ", locationDetails.name));
+  }, "Weather details of ", locationDetails.name), Object.keys(weather).length === 0 && weather.constructor === Object ? null : /*#__PURE__*/_react.default.createElement("h2", {
+    className: classes.text
+  }, "Temperature: ", weather['temp'].toString().substring(0, 2), "\xB0 C"), Object.keys(weather).length === 0 && weather.constructor === Object ? null : /*#__PURE__*/_react.default.createElement("h2", {
+    className: classes.text
+  }, "Feels Like: ", weather['feels_like'].toString().substring(0, 2), "\xB0 C"), Object.keys(weather).length === 0 && weather.constructor === Object ? null : /*#__PURE__*/_react.default.createElement("h2", {
+    className: classes.text
+  }, "Min Temp: ", weather['temp_min'].toString().substring(0, 2), "\xB0 C"), Object.keys(weather).length === 0 && weather.constructor === Object ? null : /*#__PURE__*/_react.default.createElement("h2", {
+    className: classes.text
+  }, "Max Temp: ", weather['temp_max'].toString().substring(0, 2), "\xB0 C"));
 };
 
 var _default = Weather;
@@ -84657,7 +84669,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49244" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58190" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

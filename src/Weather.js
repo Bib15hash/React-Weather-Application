@@ -43,7 +43,9 @@ const useStyles = makeStyles({
         fontFamily: 'Montserrat',
         fontWeight: 'bolder',
         textAlign: 'center',
-        marginRight: '3rem'
+        marginRight: '3rem',
+        position: 'relative',
+        bottom: '2rem'
     }
 
 });
@@ -69,24 +71,31 @@ const Weather = () => {
         return axios.get(url).then(res => {
             setLocationDetails(res.data)
             setWeather(res.data.main)
+            setCity('')
         }).catch(err => {
             console.log(err)
         });
     }
+
+    console.log(weather)
 
     return (
         <div>
         <div className={classes.base}>   
             
             <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-            <h1 className={classes.h1}>Weather Forecast</h1>
+            <h1 className={classes.h1}>WeatherNow - Get weather by city!</h1>
                 <TextField onChange={(e) => {setCity(e.target.value)}} className={classes.textfield} placeholder="Search a city" name="city" value={city}/>
                 <Button type="submit" className={classes.btn} variant="outlined" color="primary" size='medium'>Get Weather</Button>
             </form>      
             
         </div>
 
-    {Object.keys(weather).length === 0 && weather.constructor === Object ? null : <h2 className={classes.text}>It's {weather['temp'].toString().substring(0,2)}° C in {locationDetails.name}</h2>}
+    {Object.keys(weather).length === 0 && weather.constructor === Object ? null : <h2 className={classes.text}>Weather details of {locationDetails.name}</h2>}
+    {Object.keys(weather).length === 0 && weather.constructor === Object ? null : <h2 className={classes.text}>Temperature: {weather['temp'].toString().substring(0,2)}° C</h2>}
+    {Object.keys(weather).length === 0 && weather.constructor === Object ? null : <h2 className={classes.text}>Feels Like: {weather['feels_like'].toString().substring(0,2)}° C</h2>}
+    {Object.keys(weather).length === 0 && weather.constructor === Object ? null : <h2 className={classes.text}>Min Temp: {weather['temp_min'].toString().substring(0,2)}° C</h2>}
+    {Object.keys(weather).length === 0 && weather.constructor === Object ? null : <h2 className={classes.text}>Max Temp: {weather['temp_max'].toString().substring(0,2)}° C</h2>}
         </div>
     )
 }
